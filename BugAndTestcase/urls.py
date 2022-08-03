@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 from managementapp import views as management_view
 from adminsapp import views as admins_view
 from employeeapp import views as employee_view
+from django.views.static import serve
+from django.conf.urls import url
 
 
 urlpatterns = [
@@ -92,6 +94,8 @@ urlpatterns = [
     path("tester_status_insert/",employee_view.tester_status_insert,name="tester_status_insert"),
     path("analyst_view_bugs/",employee_view.analyst_view_bugs,name="analyst_view_bugs"),
     path("analyst_view_testcases/",employee_view.analyst_view_testcases,name="analyst_view_testcases"),
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,
